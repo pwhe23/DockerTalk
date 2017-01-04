@@ -1,0 +1,31 @@
+docker pull <user/image>
+docker ps -a (list all containers, including stopped)
+docker commit <containerid> <image> (create new image with container changes)
+docker images (list all images)
+docker rmi <user/image> (remove image)
+docker rmi $(docker images -qf "dangling=true")
+FOR /f "tokens=*" %i IN ('docker images -qf "dangling=true"') DO docker rmi %i
+docker run --rm <name> <command> <args...>
+docker build -t <name> . (build docker image from current folder)
+docker run -d -p <host port>:<container port> --name <name> <image> (run in background with process name)
+docker start <name> (start container)
+docker stop <name> (stop running container)
+docker exec -it <name> <command> (run a command within a running container without changing the state of the running container)
+docker rm -f <name> (kill and remove container by name)
+docker inspect <name> (show container details)
+docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" <name> (show container port)
+docker-compose build
+docker-compose up
+docker-compose up -d
+docker-compose ps
+docker search microsoft (search for images)
+docker rm -vf $(docker ps -qa) (clean up images)
+FOR /f "tokens=*" %i IN ('docker ps -aq -f "status=exited"') DO docker rm %i
+docker system prune (delete all unused data: containers, volumes, images)
+docker info
+docker network inspect nat
+docker service inspect nginx
+docker network ls
+docker login
+docker push <user>/<image>
+docker port <container> (will list the port mapping information)
