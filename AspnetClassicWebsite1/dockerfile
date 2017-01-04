@@ -1,0 +1,11 @@
+FROM microsoft/aspnet
+
+RUN mkdir C:\site
+
+RUN powershell -NoProfile -Command \
+    Import-module IISAdministration; \
+    New-IISSite -Name "Site" -PhysicalPath C:\site -BindingInformation "*:5000:"
+
+EXPOSE 5000
+
+ADD . /site
